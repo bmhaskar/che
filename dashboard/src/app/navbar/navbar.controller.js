@@ -16,12 +16,13 @@ export class CheNavBarCtrl {
    * Default constructor
    * @ngInject for Dependency injection
    */
-  constructor($mdSidenav, $scope, $location, $route, userDashboardConfig, cheAPI) {
+  constructor($mdSidenav, $scope, $location, $route, userDashboardConfig, cheAPI, $rootScope, $window) {
     this.mdSidenav = $mdSidenav;
     this.$scope = $scope;
     this.$location = $location;
     this.$route = $route;
     this.cheAPI = cheAPI;
+    this.$window = $window;
     this.links = [{href: '#/create-workspace', name: 'New Workspace'}];
 
     this.displayLoginItem = userDashboardConfig.developmentMode;
@@ -65,7 +66,7 @@ export class CheNavBarCtrl {
     $scope.$on('$locationChangeStart', () => {
       let path = '#' + $location.path(),
         match = Object.keys(this.menuItemUrl).some(item => this.menuItemUrl[item] === path);
-      if (match) {
+      if (match || /\/ide\//.test(path)) {
         $scope.$broadcast('navbar-selected:restore', path);
       }
       else {
@@ -93,5 +94,13 @@ export class CheNavBarCtrl {
 
   getWorkspacesNumber() {
     return this.cheAPI.cheWorkspace.getWorkspaces().length;
+  }
+
+  getProjectsNumber() {
+    return this.cheAPI.cheWorkspace.getAllProjects().length;
+  }
+
+  openLinkInNewTab(url) {
+    this.$window.open(url, '_blank');
   }
 }

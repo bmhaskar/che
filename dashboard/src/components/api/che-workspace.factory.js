@@ -228,10 +228,13 @@ export class CheWorkspace {
     config = config || {};
     config.name = workspaceName;
     config.projects = [];
-    config.defaultEnv = workspaceName;
+   // config.defaultEnv = workspaceName;
     config.description = null;
     ram = ram || 2048;
-    config.environments = [{
+
+
+
+    /*config.environments = [{
       'name': workspaceName,
       'recipe': null,
       'machineConfigs': [{
@@ -241,7 +244,7 @@ export class CheWorkspace {
         'source': {'location': recipeUrl, 'type': 'dockerfile'},
         'dev': true
       }]
-    }];
+    }];*/
 
     return config;
   }

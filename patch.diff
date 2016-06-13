@@ -1,0 +1,95 @@
+diff --git a/core/ide/che-core-ide-stacks/src/main/resources/stacks.json b/core/ide/che-core-ide-stacks/src/main/resources/stacks.json
+index a4c669d..60a4714 100644
+--- a/core/ide/che-core-ide-stacks/src/main/resources/stacks.json
++++ b/core/ide/che-core-ide-stacks/src/main/resources/stacks.json
+@@ -1,5 +1,61 @@
+ [
+   {
++    "id": "demo-stack",
++    "creator": "ide",
++    "name": "Demo Red Hat",
++    "description": "Demo stack",
++    "scope": "general",
++    "tags": [
++      "Java",
++      "JDK",
++      "Maven",
++      "Tomcat",
++      "Subversion",
++      "Git"
++    ],
++    "components": [
++      {
++        "name": "JDK",
++        "version": "1.8.0_45"
++      },
++      {
++        "name": "Maven",
++        "version": "3.2.2"
++      },
++      {
++        "name": "Tomcat",
++        "version": "8.0.24"
++      }
++    ],
++    "source": {
++      "type": "image",
++      "origin": "codenvy/ubuntu_wildfly8"
++    },
++    "workspaceConfig": {
++    "defaultEnv": "che-env",
++    "environments": [
++        {
++            "name": "che-env",
++            "type": "che",
++            "config" : "[{\"dev\":true,\"servers\":[{\"ref\":\"app\",\"port\":\"8000/tcp\",\"protocol\":\"http\"}],\"limits\":{\"ram\":2048},\"source\":{\"location\":\"https://gist.githubusercontent.com/garagatyi/6cb617db2368ee7ff35bca3dd6fb3e8e/raw/1b0fab21b267c783d41cc69dd92724fddf2ab820/gistfile1.txt\",\"type\":\"dockerfile\"},\"name\":\"ws-machine\",\"type\":\"docker\",\"dependsOn\":[\"db\"]},{\"dev\":false,\"limits\":{\"ram\":2048},\"source\":{\"location\":\"https://gist.githubusercontent.com/garagatyi/6324af0e0b1e508ba9a35faf4ac4e6a5/raw/c466c396c839c08b76869b95df1cae364747a97a/gistfile1.txt\",\"type\":\"dockerfile\"},\"name\":\"db\",\"type\":\"docker\"}]"
++        }
++    ],
++    "name": "che-ws10"
++},
++    "acl": [
++      {
++        "user": "*",
++        "actions": [
++          "read"
++        ]
++      }
++    ],
++    "stackIcon": {
++      "name": "type-java.svg",
++      "mediaType": "image/svg+xml"
++    }
++  },
++  {
+     "id": "java-default",
+     "creator": "ide",
+     "name": "Java",
+diff --git a/dashboard/src/components/api/che-workspace.factory.js b/dashboard/src/components/api/che-workspace.factory.js
+index d343b2d..c8285f9 100644
+--- a/dashboard/src/components/api/che-workspace.factory.js
++++ b/dashboard/src/components/api/che-workspace.factory.js
+@@ -228,10 +228,13 @@ export class CheWorkspace {
+     config = config || {};
+     config.name = workspaceName;
+     config.projects = [];
+-    config.defaultEnv = workspaceName;
++   // config.defaultEnv = workspaceName;
+     config.description = null;
+     ram = ram || 2048;
+-    config.environments = [{
++
++
++
++    /*config.environments = [{
+       'name': workspaceName,
+       'recipe': null,
+       'machineConfigs': [{
+@@ -241,7 +244,7 @@ export class CheWorkspace {
+         'source': {'location': recipeUrl, 'type': 'dockerfile'},
+         'dev': true
+       }]
+-    }];
++    }];*/
+ 
+     return config;
+   }

@@ -1,5 +1,61 @@
 [
   {
+    "id": "demo-stack",
+    "creator": "ide",
+    "name": "Demo Red Hat",
+    "description": "Demo stack",
+    "scope": "general",
+    "tags": [
+      "Java",
+      "JDK",
+      "Maven",
+      "Tomcat",
+      "Subversion",
+      "Git"
+    ],
+    "components": [
+      {
+        "name": "JDK",
+        "version": "1.8.0_45"
+      },
+      {
+        "name": "Maven",
+        "version": "3.2.2"
+      },
+      {
+        "name": "Tomcat",
+        "version": "8.0.24"
+      }
+    ],
+    "source": {
+      "type": "image",
+      "origin": "codenvy/ubuntu_wildfly8"
+    },
+    "workspaceConfig": {
+    "defaultEnv": "che-env",
+    "environments": [
+        {
+            "name": "che-env",
+            "type": "che",
+            "config" : "[{\"dev\":true,\"servers\":[{\"ref\":\"app\",\"port\":\"8000/tcp\",\"protocol\":\"http\"}],\"limits\":{\"ram\":2048},\"source\":{\"location\":\"https://gist.githubusercontent.com/eivantsov/4ff64acc31c4a2f98ff3d79eb096d854/raw/0a6d85e822a9f7b3f8dd885438569cd257f7a4f3/wildfly\",\"type\":\"dockerfile\"},\"name\":\"ws-machine\",\"type\":\"docker\",\"dependsOn\":[\"db\"]},{\"dev\":false,\"limits\":{\"ram\":2048},\"source\":{\"location\":\"https://gist.githubusercontent.com/eivantsov/0613c70f8f7761f1fe577da66dec333f/raw/3bca459421fe90f2e56c62d1b179959b62e9a6bc/mysql\",\"type\":\"dockerfile\"},\"name\":\"db\",\"type\":\"docker\"}]"
+        }
+    ],
+    "name": "che-ws10"
+},
+    "acl": [
+      {
+        "user": "*",
+        "actions": [
+          "read"
+        ]
+      }
+    ],
+    "stackIcon": {
+      "name": "type-java.svg",
+      "mediaType": "image/svg+xml"
+    }
+  },
+  {
     "id": "java-default",
     "creator": "ide",
     "name": "Java",

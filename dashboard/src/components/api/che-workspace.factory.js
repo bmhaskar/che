@@ -332,7 +332,17 @@ export class CheWorkspace {
   }
 
   getAllProjects() {
-    let projects = this.lodash.pluck(this.workspaces, 'config.projects');
+    let projects = this.lodash.map(this.workspaces, (workspace) => {
+      if (workspace.config.projects && workspace.config.projects.length) {
+        let projects = workspace.config.projects;
+        projects.forEach((project) => {
+          project.workspaceId = workspace.id;
+          project.workspaceName = workspace.config.name;
+        });
+        return projects;
+      }
+      return [];
+    });
     return [].concat.apply([], projects);
   }
 

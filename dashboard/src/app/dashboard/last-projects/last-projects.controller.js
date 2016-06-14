@@ -33,49 +33,32 @@ export class DashboardLastProjectsController {
     let promise = cheWorkspace.fetchWorkspaces();
 
     promise.then(() => {
-        this.projects = cheWorkspace.getAllProjects();
-        this.updateProjectWorkspace();
+        this.buildProjectsList();
         this.state = 'OK';
       },
       (error) => {
         if (error.status === 304) {
           // ok
-          this.projects = cheWorkspace.getAllProjects();
-          this.updateProjectWorkspace();
+          this.buildProjectsList();
           this.state = 'OK';
           return;
         }
         this.state = 'error';
       });
-
-    this.projectWorkspace = {};
   }
 
-  updateProjectWorkspace() {
-    let workspaces = this.cheWorkspace.getWorkspaces();
-    workspaces.forEach((workspace) => {
-      if (workspace.config.projects && workspace.config.projects.length > 0) {
-        let projects = workspace.config.projects;
-        projects.forEach((project) => {
-          this.projectWorkspace[project.name] = {
-            id: workspace.id,
-            name: workspace.config.name
-          };
-        })
-      }
-    })
+  buildProjectsList() {
+    let workspaceProjects = this.cheWorkspace.getWorkspaceProjects();
+
+    let projects = [];
+    angular.forEach(workspaceProjects, (workspaceProjects) => {
+      projects.push(workspaceProjects)
+    });
+    this.projects = [].concat.apply([], projects);
   }
 
   getProjects() {
     return this.projects;
-  }
-
-  getWorkspaceId(projectName) {
-    return this.projectWorkspace[projectName] ? this.projectWorkspace[projectName].id : 0;
-  }
-
-  getWorkspaceName(projectName) {
-    return this.projectWorkspace[projectName] ? this.projectWorkspace[projectName].name : '';
   }
 
 }

@@ -11,11 +11,11 @@
 'use strict';
 
 /**
- * Defines a directive for creating RAM allocation slider that are working either on desktop or on mobile devices.
- * It will change upon width of the screen
+ * Defines a directive for creating an indicator of workspace's status, which contains
+ * both icon and text representation of current status
  * @author Oleksii Kurinnyi
  */
-export class WorkspaceStatusIndicator {
+export class WorkspaceStatus {
 
   /**
    * Default constructor that is using resource
@@ -25,7 +25,7 @@ export class WorkspaceStatusIndicator {
     this.restrict = 'E';
 
     this.replace = true;
-    this.templateUrl = 'app/workspaces/workspace-status-indicator/workspace-status-indicator.html';
+    this.templateUrl = 'app/workspaces/workspace-status/workspace-status.html';
 
     // scope values
     this.scope = {

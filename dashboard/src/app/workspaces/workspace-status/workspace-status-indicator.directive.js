@@ -11,10 +11,10 @@
 'use strict';
 
 /**
- * Defines a directive for creating simple circle indicator of workspace's status.
+ * Defines a directive for creating simple indicator of workspace's status.
  * @author Oleksii Kurinnyi
  */
-export class WorkspaceStatusIndicatorCircle {
+export class WorkspaceStatusIndicator {
 
   /**
    * Default constructor that is using resource
@@ -31,7 +31,7 @@ export class WorkspaceStatusIndicatorCircle {
   }
 
   /**
-   * Template for the circle indicator of workspace's status
+   * Template for the simple indicator of workspace's status
    * @param element
    * @param attrs
    * @returns {string} the template
@@ -39,7 +39,7 @@ export class WorkspaceStatusIndicatorCircle {
   template (element, attr) {
     let emptyCircleOnStopped = attr.cheEmptyCircle;
 
-    return '<span ng-switch="status" class="workspace-status-indicator-circle">' +
+    return '<span ng-switch="status" class="workspace-status-indicator">' +
       '<span ng-switch-when="STOPPED" class="fa ' + (emptyCircleOnStopped ? 'fa-circle-o' : 'fa-circle') + ' workspace-status-stopped"></span>' +
       '<span ng-switch-when="PAUSED" class="fa fa-pause workspace-status-paused"></span>' +
       '<span ng-switch-when="RUNNING" class="fa fa-circle workspace-status-running"></span>' +

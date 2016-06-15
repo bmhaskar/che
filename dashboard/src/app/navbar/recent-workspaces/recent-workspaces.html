@@ -23,11 +23,11 @@
                      ng-href="{{navbarRecentWorkspacesController.getIdeLink(workspace.id)}}" layout-align="left"
                      target="_self">
             <div class="navbar-item" layout="row" layout-align="start center">
-              <workspace-status-indicator-circle
+              <workspace-status-indicator
                 che-status="navbarRecentWorkspacesController.getWorkspaceStatus(workspace.id)"
                 che-empty-circle="true"
                 class="navbar-icon"
-                title="{{navbarRecentWorkspacesController.getWorkspaceStatus(workspace.id)}}"></workspace-status-indicator-circle>
+                title="{{navbarRecentWorkspacesController.getWorkspaceStatus(workspace.id)}}"></workspace-status-indicator>
             <span title="{{navbarRecentWorkspacesController.getWorkspaceName(workspace.id)}}"
                   ng-class="{'recent-workspaces-stopped-workspace': navbarRecentWorkspacesController.getWorkspaceStatus(workspace.id) === 'STOPPED'}">{{navbarRecentWorkspacesController.getWorkspaceName(workspace.id)}}</span>
             </div>

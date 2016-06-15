@@ -15,6 +15,8 @@ import com.google.common.io.Files;
 import org.eclipse.che.api.git.GitConnection;
 import org.eclipse.che.api.git.GitConnectionFactory;
 import org.eclipse.che.api.git.GitException;
+import org.eclipse.che.api.git.params.AddParams;
+import org.eclipse.che.api.git.params.CommitParams;
 import org.eclipse.che.api.git.shared.AddRequest;
 import org.eclipse.che.api.git.shared.CommitRequest;
 import org.eclipse.che.api.git.shared.GitUser;
@@ -57,8 +59,8 @@ public class GetCommitersTest {
 
         //given
         addFile(connection, "newfile", "newfile content");
-        connection.add(newDto(AddRequest.class).withFilepattern(Arrays.asList(".")));
-        connection.commit(newDto(CommitRequest.class).withMessage("test commit"));
+        connection.add(AddParams.create().withFilePattern(Arrays.asList(".")));
+        connection.commit(CommitParams.create().withMessage("test commit"));
 
         //when
         List<GitUser> committers = connection.getCommiters();

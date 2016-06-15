@@ -14,6 +14,7 @@ import com.google.common.io.Files;
 import org.eclipse.che.api.git.GitConnection;
 import org.eclipse.che.api.git.GitConnectionFactory;
 import org.eclipse.che.api.git.GitException;
+import org.eclipse.che.api.git.params.RmParams;
 import org.eclipse.che.api.git.shared.RmRequest;
 import org.eclipse.che.api.git.shared.StatusFormat;
 import org.testng.annotations.AfterMethod;
@@ -53,7 +54,7 @@ public class RemoveTest {
         //given
         GitConnection connection = connectToGitRepositoryWithContent(connectionFactory, repository);
         //when
-        connection.rm(newDto(RmRequest.class).withItems(Arrays.asList("README.txt")).withCached(false));
+        connection.rm(RmParams.create().withItems(Arrays.asList("README.txt")).withCached(false));
         //then
         assertFalse(new File(connection.getWorkingDir(), "README.txt").exists());
         assertEquals(connection.status(StatusFormat.SHORT).getRemoved().get(0), "README.txt");
@@ -65,7 +66,7 @@ public class RemoveTest {
         //given
         GitConnection connection = connectToGitRepositoryWithContent(connectionFactory, repository);
         //when
-        connection.rm(newDto(RmRequest.class).withItems(Arrays.asList("README.txt")).withCached(true));
+        connection.rm(RmParams.create().withItems(Arrays.asList("README.txt")).withCached(true));
         //then
         assertTrue(new File(connection.getWorkingDir(), "README.txt").exists());
         assertEquals(connection.status(StatusFormat.SHORT).getRemoved().get(0), "README.txt");

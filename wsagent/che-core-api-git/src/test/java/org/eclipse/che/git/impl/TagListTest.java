@@ -14,6 +14,7 @@ import com.google.common.io.Files;
 import org.eclipse.che.api.git.GitConnection;
 import org.eclipse.che.api.git.GitConnectionFactory;
 import org.eclipse.che.api.git.GitException;
+import org.eclipse.che.api.git.params.TagCreateParams;
 import org.eclipse.che.api.git.shared.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -50,38 +51,22 @@ public class TagListTest {
     public void testTagList(GitConnectionFactory connectionFactory) throws GitException, IOException {
         GitConnection connection = connectToGitRepositoryWithContent(connectionFactory, repository);
 
-        TagCreateRequest firstTag = newDto(TagCreateRequest.class);
-        firstTag.setName("first-tag");
-        connection.tagCreate(firstTag);
-        TagCreateRequest firstTagOther = newDto(TagCreateRequest.class);
-        firstTagOther.setName("first-tag-other");
-        connection.tagCreate(firstTagOther);
-        TagCreateRequest secondTag = newDto(TagCreateRequest.class);
-        secondTag.setName("second-tag");
-        connection.tagCreate(secondTag);
+        connection.tagCreate(TagCreateParams.create().withName("first-tag"));
+        connection.tagCreate(TagCreateParams.create().withName("first-tag-other"));
+        connection.tagCreate(TagCreateParams.create().withName("second-tag"));
 
-        assertTags(connection.tagList(
-                newDto(TagListRequest.class)), "first-tag", "first-tag-other", "second-tag");
+        assertTags(connection.tagList(null), "first-tag", "first-tag-other", "second-tag");
     }
 
     @Test(dataProvider = "GitConnectionFactory", dataProviderClass = org.eclipse.che.git.impl.GitConnectionFactoryProvider.class)
     public void testTagListPattern(GitConnectionFactory connectionFactory) throws GitException, IOException {
         GitConnection connection = connectToGitRepositoryWithContent(connectionFactory, repository);
 
-        TagCreateRequest firstTag = newDto(TagCreateRequest.class);
-        firstTag.setName("first-tag");
-        connection.tagCreate(firstTag);
-        TagCreateRequest firstTagOther = newDto(TagCreateRequest.class);
-        firstTagOther.setName("first-tag-other");
-        connection.tagCreate(firstTagOther);
-        TagCreateRequest secondTag = newDto(TagCreateRequest.class);
-        secondTag.setName("second-tag");
-        connection.tagCreate(secondTag);
+        connection.tagCreate(TagCreateParams.create().withName("first-tag"));
+        connection.tagCreate(TagCreateParams.create().withName("first-tag-other"));
+        connection.tagCreate(TagCreateParams.create().withName("second-tag"));
 
-        TagListRequest request = newDto(TagListRequest.class);
-        request.setPattern("first*");
-
-        assertTags(connection.tagList(request), "first-tag", "first-tag-other");
+        assertTags(connection.tagList("first*"), "first-tag", "first-tag-other");
     }
 
     protected void assertTags(List<Tag> tagList, String... expNames) {

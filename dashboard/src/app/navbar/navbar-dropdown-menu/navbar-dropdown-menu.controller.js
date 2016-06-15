@@ -15,7 +15,7 @@
  * This class is handling the controller for the dropdown menu on navbar
  * @author Oleksii Kurinnyi
  */
-export class NavbarDropdownMenuCtrl {
+export class NavbarDropdownMenuController {
 
   /**
    * Default constructor that is using resource
@@ -27,6 +27,13 @@ export class NavbarDropdownMenuCtrl {
     this.offset = angular.isUndefined(this.offset) ? '0 0' : this.offset;
   }
 
+  /**
+   * Method process click on dropdown-menu item. If item contains
+   * url property then application will follow this URL.
+   * Otherwise, onclick callback will be called.
+   *
+   * @param item {Object} the dropdown-menu item which was clicked on
+   */
   process(item) {
     if (item.url) {
       this.redirect(item.url);

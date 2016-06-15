@@ -400,9 +400,13 @@ export class CheWorkspace {
     }
   }
 
+  /**
+   * Create snapshot of workspace
+   * @param workspaceId {String} workspace id
+   * @returns {*}
+   */
   createSnapshot(workspaceId) {
-    let promise = this.remoteWorkspaceAPI.createSnapshot({workspaceId : workspaceId}, {}).$promise;
-    return promise;
+    return this.remoteWorkspaceAPI.createSnapshot({workspaceId : workspaceId}, {}).$promise;
   }
 
 }

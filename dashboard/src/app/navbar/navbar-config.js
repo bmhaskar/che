@@ -14,10 +14,10 @@ import {CheNavBarCtrl} from './navbar.controller';
 import {CheNavBar} from './navbar.directive';
 import {NavBarSelectedCtrl} from './navbar-selected.controller';
 import {NavBarSelected} from './navbar-selected.directive';
-import {NavbarRecentWorkspacesCtrl} from './recent-workspaces/recent-workspaces.controller';
+import {NavbarRecentWorkspacesController} from './recent-workspaces/recent-workspaces.controller';
 import {NavbarRecentWorkspaces} from './recent-workspaces/recent-workspaces.directive';
 
-import {NavbarDropdownMenuCtrl} from './navbar-dropdown-menu/navbar-dropdown-menu.controller';
+import {NavbarDropdownMenuController} from './navbar-dropdown-menu/navbar-dropdown-menu.controller';
 import {NavbarDropdownMenu} from './navbar-dropdown-menu/navbar-dropdown-menu.directive';
 
 export class NavbarConfig {
@@ -28,10 +28,10 @@ export class NavbarConfig {
     register.directive('cheNavBar', CheNavBar);
     register.directive('navBarSelected', NavBarSelected);
 
-    register.controller('NavbarRecentWorkspacesCtrl', NavbarRecentWorkspacesCtrl);
+    register.controller('NavbarRecentWorkspacesController', NavbarRecentWorkspacesController);
     register.directive('navbarRecentWorkspaces', NavbarRecentWorkspaces);
 
-    register.controller('NavbarDropdownMenuCtrl', NavbarDropdownMenuCtrl);
+    register.controller('NavbarDropdownMenuController', NavbarDropdownMenuController);
     register.directive('navbarDropdownMenu', NavbarDropdownMenu);
   }
 }

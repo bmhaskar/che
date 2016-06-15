@@ -76,14 +76,12 @@ export class NavBarSelected {
       element.removeClass('navbar-item-no-hover');
     });
 
-    $scope.$on('navbar-selected:clear', () => {
-      // unselect item
-      if (this.$rootScope.selectedNavBarElement) {
+    $scope.$on('navbar-selected:set', (event, path) => {
+      // unselect previously selected item
+      if (this.$rootScope.selectedNavBarElement === element) {
         this.$rootScope.selectedNavBarElement.removeClass('che-navbar-selected');
         delete this.$rootScope.selectedNavBarElement;
       }
-    });
-    $scope.$on('navbar-selected:restore', (event, path) => {
       // select item
       if (attrs['ngHref'] === path) {
         select(element);

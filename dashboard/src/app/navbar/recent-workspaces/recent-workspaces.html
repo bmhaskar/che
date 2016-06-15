@@ -1,5 +1,5 @@
 <div class="admin-navbar-menu recent-workspaces"
-     ng-show="navbarRecentWorkspacesCtrl.getRecentWorkspaces().length">
+     ng-show="navbarRecentWorkspacesController.getRecentWorkspaces().length">
   <section class="left-sidebar-menu" layout="column" layout-align="start start">
 
     <div class="navbar-section"
@@ -9,27 +9,27 @@
 
     <md-list layout="column">
       <md-list-item flex class="navbar-subsection-item"
-                    ng-repeat="workspace in navbarRecentWorkspacesCtrl.getRecentWorkspaces()
+                    ng-repeat="workspace in navbarRecentWorkspacesController.getRecentWorkspaces()
                     | orderBy:['attributes.opened', 'attributes.updated']:'reverse'
                     | limitTo:5"
-                    ng-class="{'recent-workspaces-last-opened': navbarRecentWorkspacesCtrl.isOpen(workspace.id)}">
+                    ng-class="{'recent-workspaces-last-opened': navbarRecentWorkspacesController.isOpen(workspace.id)}">
         <navbar-dropdown-menu flex
-                              navbar-dropdown-items="navbarRecentWorkspacesCtrl.getDropdownItems(workspace.id)"
+                              navbar-dropdown-items="navbarRecentWorkspacesController.getDropdownItems(workspace.id)"
                               navbar-dropdown-right-click
                               navbar-dropdown-external-class="recent-workspaces-menu"
                               navbar-dropdown-offset="30 22">
           <md-button nav-bar-selected flex che-reload-href
-                     che-on-long-touch="navbarRecentWorkspacesCtrl.openLinkInNewTab(workspace.id)"
-                     ng-href="{{navbarRecentWorkspacesCtrl.getIdeLink(workspace.id)}}" layout-align="left"
+                     che-on-long-touch="navbarRecentWorkspacesController.openLinkInNewTab(workspace.id)"
+                     ng-href="{{navbarRecentWorkspacesController.getIdeLink(workspace.id)}}" layout-align="left"
                      target="_self">
             <div class="navbar-item" layout="row" layout-align="start center">
               <workspace-status-indicator-circle
-                che-status="navbarRecentWorkspacesCtrl.getWorkspaceStatus(workspace.id)"
+                che-status="navbarRecentWorkspacesController.getWorkspaceStatus(workspace.id)"
                 che-empty-circle="true"
                 class="navbar-icon"
-                title="{{navbarRecentWorkspacesCtrl.getWorkspaceStatus(workspace.id)}}"></workspace-status-indicator-circle>
-            <span title="{{navbarRecentWorkspacesCtrl.getWorkspaceName(workspace.id)}}"
-                  ng-class="{'recent-workspaces-stopped-workspace': navbarRecentWorkspacesCtrl.getWorkspaceStatus(workspace.id) === 'STOPPED'}">{{navbarRecentWorkspacesCtrl.getWorkspaceName(workspace.id)}}</span>
+                title="{{navbarRecentWorkspacesController.getWorkspaceStatus(workspace.id)}}"></workspace-status-indicator-circle>
+            <span title="{{navbarRecentWorkspacesController.getWorkspaceName(workspace.id)}}"
+                  ng-class="{'recent-workspaces-stopped-workspace': navbarRecentWorkspacesController.getWorkspaceStatus(workspace.id) === 'STOPPED'}">{{navbarRecentWorkspacesController.getWorkspaceName(workspace.id)}}</span>
             </div>
           </md-button>
         </navbar-dropdown-menu>

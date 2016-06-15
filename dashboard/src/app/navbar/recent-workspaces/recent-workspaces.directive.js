@@ -27,8 +27,8 @@ export class NavbarRecentWorkspaces {
     this.restrict = 'E';
     this.templateUrl = 'app/navbar/recent-workspaces/recent-workspaces.html';
 
-    this.controller = 'NavbarRecentWorkspacesCtrl';
-    this.controllerAs = 'navbarRecentWorkspacesCtrl';
+    this.controller = 'NavbarRecentWorkspacesController';
+    this.controllerAs = 'navbarRecentWorkspacesController';
     this.bindToController = true;
   }
 

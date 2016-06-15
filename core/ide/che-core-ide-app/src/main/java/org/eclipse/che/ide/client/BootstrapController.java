@@ -220,7 +220,7 @@ public class BootstrapController {
     }
 
     /**
-     * Sends a message to the parent frame to inform that IDE ide has been loaded.
+     * Sends a message to the parent frame to inform that IDE application has been loaded.
      */
     private native void notifyIDELoaded() /*-{
         $wnd.parent.postMessage("ide-loaded", "*");

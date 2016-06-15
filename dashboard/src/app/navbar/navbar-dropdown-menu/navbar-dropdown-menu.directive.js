@@ -11,6 +11,9 @@
 'use strict';
 
 /**
+ * @ngDoc directive
+ * @name navbar.directive:NavbarDropdownMenu
+ * @description This class is handling the directive to show the dropdown menu in the navbar
  * @author Oleksii Kurinnyi
  */
 export class NavbarDropdownMenu {
@@ -28,8 +31,8 @@ export class NavbarDropdownMenu {
     this.restrict = 'E';
     this.bindToController = true;
     this.templateUrl = 'app/navbar/navbar-dropdown-menu/navbar-dropdown-menu.html';
-    this.controller = 'NavbarDropdownMenuCtrl';
-    this.controllerAs = 'navbarDropdownMenuCtrl';
+    this.controller = 'NavbarDropdownMenuController';
+    this.controllerAs = 'navbarDropdownMenuController';
 
     this.transclude = true;
 
@@ -92,7 +95,7 @@ export class NavbarDropdownMenu {
       // iterate elements under cursor
       let limit = 50,
         nextTargetEl;
-      while (elementMouseIsOver.tagName !== 'MD-MENU' && limit>0){
+      while (elementMouseIsOver.tagName !== 'MD-MENU' && limit > 0){
         elementMouseIsOver = self.$document[0].elementFromPoint(x, y);
 
         // break when top of tree is reached

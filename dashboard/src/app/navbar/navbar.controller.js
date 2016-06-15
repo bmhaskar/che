@@ -60,18 +60,10 @@ export class CheNavBarCtrl {
       billing: '#/billing'
     };
 
-    // clear highlighting of menu item from navbar
-    // if route is not part of navbar
-    // or restore highlighting otherwise
+    // highlight navbar menu item
     $scope.$on('$locationChangeStart', () => {
-      let path = '#' + $location.path(),
-        match = Object.keys(this.menuItemUrl).some(item => this.menuItemUrl[item] === path);
-      if (match || /\/ide\//.test(path)) {
-        $scope.$broadcast('navbar-selected:restore', path);
-      }
-      else {
-        $scope.$broadcast('navbar-selected:clear');
-      }
+      let path = '#' + $location.path();
+      $scope.$broadcast('navbar-selected:set', path);
     });
 
     cheAPI.cheWorkspace.fetchWorkspaces();

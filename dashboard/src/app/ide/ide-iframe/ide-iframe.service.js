@@ -27,8 +27,8 @@ class IdeIFrameSvc {
     this.$timeout = $timeout;
     this.$compile = $compile;
 
-    $window.addEventListener("message", function(event) {
-      if ("ide-loaded" == event.data) {
+    $window.addEventListener("message", (event) => {
+      if ("ide-loaded" === event.data) {
         // check whether user is still waiting for IDE
         if (/\/ide\//.test($location.path())) {
           $rootScope.$apply(() => {

@@ -16,7 +16,7 @@
  * @description This class is handling the controller of the recent workspaces to display in the navbar
  * @author Oleksii Kurinnyi
  */
-export class NavbarRecentWorkspacesCtrl {
+export class NavbarRecentWorkspacesController {
 
   /**
    * Default constructor
@@ -60,7 +60,7 @@ export class NavbarRecentWorkspacesCtrl {
     let cleanup = $rootScope.$on('recent-workspace:set', (event, workspaceId) => {
       this.veryRecentWorkspaceId = workspaceId;
     });
-    $rootScope.$on('$destroy', function() {
+    $rootScope.$on('$destroy', () => {
       cleanup();
     });
   }
@@ -108,19 +108,38 @@ export class NavbarRecentWorkspacesCtrl {
     return workspace ? workspace.config.name : 'unknown';
   }
 
+  /**
+   * Returns true if workspace is opened in IDE
+   * @param workspaceId {String} workspace id
+   * @returns {*|null|boolean}
+   */
   isOpen(workspaceId) {
     return this.ideSvc.openedWorkspace && this.ideSvc.openedWorkspace.id === workspaceId;
   }
 
+  /**
+   * Returns IDE link
+   * @param workspaceId {String} workspace id
+   * @returns {string}
+   */
   getIdeLink(workspaceId) {
     return '#/ide/' + this.getWorkspaceName(workspaceId);
   }
 
+  /**
+   * Opens new tab/window with IDE
+   * @param workspaceId {String} workspace id
+   */
   openLinkInNewTab(workspaceId) {
     let url = this.getIdeLink(workspaceId);
     this.$window.open(url, '_blank');
   }
 
+  /**
+   * Builds and returns array of dropdown menu items for specified workspace
+   * @param workspaceId {String} workspace id
+   * @returns {*}
+   */
   getDropdownItems(workspaceId) {
     let workspace = this.cheWorkspace.getWorkspaceById(workspaceId),
       disabled = workspace && (workspace.status === 'STARTING' || workspace.status === 'STOPPING'),
@@ -142,12 +161,20 @@ export class NavbarRecentWorkspacesCtrl {
     return this.dropdownItems[workspaceId];
   }
 
+  /**
+   * Stops specified workspace
+   * @param workspaceId {String} workspace id
+   */
   stopRecentWorkspace(workspaceId) {
     this.cheWorkspace.stopWorkspace(workspaceId).then(() => {}, (error) => {
       this.$log.error(error);
     });
   }
 
+  /**
+   * Starts specified workspace
+   * @param workspaceId {String} workspace id
+   */
   runRecentWorkspace(workspaceId) {
     let workspace = this.cheWorkspace.getWorkspaceById(workspaceId);
 
@@ -157,6 +184,10 @@ export class NavbarRecentWorkspacesCtrl {
     });
   }
 
+  /**
+   * Creates snapshot of specified workspace
+   * @param workspaceId {String} workspace id
+   */
   createSnapshotRecentWorkspace(workspaceId) {
     this.cheWorkspace.createSnapshot(workspaceId).then(() => {}, (error) => {
       this.$log.error(error);

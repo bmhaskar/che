@@ -45,7 +45,6 @@ export class CheOnRightClick {
 
       $scope.$apply(() => {
         $scope.$eval(attrs.cheOnRightClick);
-        $scope.longTouch = false;
       });
     });
   }

@@ -31,7 +31,7 @@ export class WorkspaceStatusIndicatorCircle {
   }
 
   /**
-   * Template for the current toolbar
+   * Template for the circle indicator of workspace's status
    * @param element
    * @param attrs
    * @returns {string} the template
